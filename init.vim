@@ -1,5 +1,9 @@
 call plug#begin('~/.config/nvim/plugged')
 
+" explor
+Plug 'nvim-tree/nvim-web-devicons'
+Plug 'nvim-tree/nvim-tree.lua'
+
 Plug 'ellisonleao/gruvbox.nvim' " 新增 
 Plug 'kyazdani42/nvim-web-devicons' " 新增  
 Plug 'vim-airline/vim-airline'                                                           
@@ -16,4 +20,6 @@ set clipboard=unnamed
 
 let g:airline#extensions#tabline#enabled = 1     
 let g:airline#extensions#tabline#formatter = 'default'
-nmap e <Plug>AirlineSelectPrevTab     
+nmap e <Plug>AirlineSelectPrevTab    
+
+lua require'nvim-tree'.setup{}
