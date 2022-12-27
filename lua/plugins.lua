@@ -42,4 +42,10 @@ return require('packer').startup(function()
 
   -- lspkind
   use 'onsails/lspkind-nvim'
+
+  -- comments
+  use "terrortylor/nvim-comment"
+
+  -- terminal
+  use {"akinsho/toggleterm.nvim", tag = 'v2'}
 end)

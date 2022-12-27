@@ -45,4 +45,12 @@ pluginKeys.cmp = function(cmp)
   }
 end
 
+pluginKeys.term = function(term)
+  return {
+    
+  }
+end
+
+-- map('n', '<C-t>', ':ToggleTerm<CR>', opt)
+
 return pluginKeys
