@@ -47,5 +47,5 @@ return require('packer').startup(function()
   use "terrortylor/nvim-comment"
 
   -- terminal
-  use {"akinsho/toggleterm.nvim", tag = 'v2'}
+  use {"akinsho/toggleterm.nvim", tag = '*'}
 end)
