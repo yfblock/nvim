@@ -32,3 +32,31 @@ require('plugin-config/bufferline')
 
 -- theme
 require('zephyr')
+
+require("mason").setup({
+    ui = {
+        icons = {
+            package_installed = "✓",
+            package_pending = "➜",
+            package_uninstalled = "✗"
+        }
+    }
+})
+require("mason-lspconfig").setup()
+
+require('lspconfig')['rust_analyzer'].setup{
+    on_attach = on_attach,
+    flags = lsp_flags,
+    -- Server-specific settings...
+    settings = {
+      ["rust-analyzer"] = {}
+    }
+}
+
+require('lspconfig')['pyright'].setup {
+  on_attach = on_attach,
+  capabilities = capabilities
+}
+
+require('lsp/nvim-cmp')
+require("plugin-config/nvim-treesitter")
