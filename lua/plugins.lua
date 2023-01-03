@@ -42,7 +42,16 @@ return require('packer').startup(function()
 
   -- lspkind
   use 'onsails/lspkind-nvim'
-
+  use 'simrat39/rust-tools.nvim'
+  use {
+    'saecki/crates.nvim',
+    tag = 'v0.3.0',
+    requires = { 'nvim-lua/plenary.nvim' },
+    config = function()
+        require('crates').setup()
+    end,
+  }
+  
   -- comments
   use "terrortylor/nvim-comment"
 

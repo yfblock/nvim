@@ -63,8 +63,19 @@ require('lspconfig')['tsserver'].setup {
   capabilities = capabilities
 }
 
+require('lspconfig')['taplo'].setup {
+  on_attach = on_attach,
+  capabilities = capabilities
+}
+
+
 
 require('lsp/nvim-cmp')
 require("plugin-config/nvim-treesitter")
 require('plugin-config/nvim-comment')
 require('plugin-config/nvim-term')
+-- require('plugin-config/rust-tools')
+
+
+-- set clipboard
+vim.opt.clipboard = "unnamedplus"

@@ -2,7 +2,7 @@ vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
 local map = vim.api.nvim_set_keymap
-local opt = {noremap = true, silent = true }
+local opt = {noremap = true, silent = false }
 
 map('n', '<C-n>', ':NvimTreeToggle<CR>', opt)
 
@@ -12,6 +12,8 @@ map("n", "<C-Right>", ":BufferLineCycleNext<CR>", opt)
 
 -- LSP
 map('n', 'gh', '<cmd>lua vim.lsp.buf.hover()<CR>', opt)
+map('n', '<C-b>', "<cmd>'<,'>CommentToggle<CR>", opt)
+
 
 
 -- 插件快捷键
