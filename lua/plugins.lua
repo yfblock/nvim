@@ -57,4 +57,12 @@ return require('packer').startup(function()
 
   -- terminal
   use {"akinsho/toggleterm.nvim", tag = '*'}
+
+  -- start screen
+  use {
+    "glepnir/dashboard-nvim",
+     config = function()
+       require("plugin-config/dashboard")
+     end,
+  }
 end)
