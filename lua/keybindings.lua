@@ -12,8 +12,8 @@ map("n", "<C-Right>", ":BufferLineCycleNext<CR>", opt)
 
 -- LSP
 map('n', 'gh', '<cmd>lua vim.lsp.buf.hover()<CR>', opt)
-map('n', '<C-b>', "<cmd>'<,'>CommentToggle<CR>", opt)
-
+map('v', '<C-b>', "<Esc><cmd>'<,'>CommentToggle<CR>", opt)
+map('n', '<C-b>', "<Esc><cmd>'<,'>CommentToggle<CR>", opt)
 
 
 -- 插件快捷键
