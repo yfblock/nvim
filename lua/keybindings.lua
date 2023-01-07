@@ -24,9 +24,9 @@ local pluginKeys = {}
 pluginKeys.cmp = function(cmp)
   return {
     -- 上一个
-    ['<C-Up>'] = cmp.mapping.select_prev_item(),
+    ['<Up>'] = cmp.mapping.select_prev_item(),
     -- 下一个
-    ['<C-Down>'] = cmp.mapping.select_next_item(),
+    ['<Down>'] = cmp.mapping.select_next_item(),
     -- 出现补全
     ['<A-.>'] = cmp.mapping(cmp.mapping.complete(), { 'i', 'c' }),
     -- 取消
