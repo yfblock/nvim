@@ -69,6 +69,11 @@ require('lspconfig')['taplo'].setup {
 }
 
 
+require('lspconfig')['sumneko_lua'].setup {
+  on_attach = on_attach,
+  capabilities = capabilities
+}
+
 
 require('lsp/nvim-cmp')
 require("plugin-config/nvim-treesitter")

@@ -1,66 +1,84 @@
-local lspkind = require('lspkind')
-local cmp = require'cmp'
+local cmp = require("cmp")
+local lspkind = require("lspkind")
+cmp.setup({
+    -- 设置代码片段引擎，用于根据代码片段补全
+    snippet = {
+        expand = function(args)
+            -- vim.fn["vsnip#anymous"](args.body)
+        end,
+    },
 
-cmp.setup {
-  -- 指定 snippet 引擎
-  snippet = {
-    expand = function(args)
-      -- For `vsnip` users.
-      vim.fn["vsnip#anonymous"](args.body)
+    window = {
+    },
 
-      -- For `luasnip` users.
-      -- require('luasnip').lsp_expand(args.body)
+    mapping = {
+        -- 选择上一个
+        ['<Up>'] = cmp.mapping.select_prev_item(),
+        -- 选择下一个
+        ['<Down>'] = cmp.mapping.select_next_item(),
+        -- 出现补全
+        ['<A-.>'] = cmp.mapping(cmp.mapping.complete(), {'i', 'c'}),
+        -- 取消补全
+        ['<A-,>'] = cmp.mapping({
+            i = cmp.mapping.abort(),
+            c = cmp.mapping.close(),
+        }),
 
-      -- For `ultisnips` users.
-      -- vim.fn["UltiSnips#Anon"](args.body)
+        -- 确认使用某个补全项
+        ['<CR>'] = cmp.mapping.confirm({
+            select = true,
+            behavior = cmp.ConfirmBehavior.Replace
+        }),
 
-      -- For `snippy` users.
-      -- require'snippy'.expand_snippet(args.body)
-    end,
-  },
-  -- 来源
-  sources = cmp.config.sources({
-    { name = 'nvim_lsp' },
-    -- For vsnip users.
-    { name = 'vsnip' },
-    -- For luasnip users.
-    -- { name = 'luasnip' },
-    --For ultisnips users.
-    -- { name = 'ultisnips' },
-    -- -- For snippy users.
-    -- { name = 'snippy' },
-  }, { { name = 'buffer' },
-       { name = 'path' }
+        -- 向上翻页
+        ['<C-u>'] = cmp.mapping(cmp.mapping.scroll_docs(-4), {'i', 'c'}),
+        -- 向下翻页
+        ['<C-d>'] = cmp.mapping(cmp.mapping.scroll_docs(4), {'i', 'c'}),
+    },
+
+    -- 补全来源
+    sources = cmp.config.sources({
+        {name = 'nvim_lsp'},
+        {name = 'vsnip'},
+        {name = 'buffer'},
+        {name = 'path'}
     }),
 
-  -- 快捷键
-  mapping = require'keybindings'.cmp(cmp),
-  -- 使用lspkind-nvim显示类型图标
-  formatting = {
-    format = lspkind.cmp_format({
-      with_text = true, -- do not show text alongside icons
-      maxwidth = 50, -- prevent the popup from showing more than provided characters (e.g 50 will not show more than 50 characters)
-      before = function (entry, vim_item)
-        -- Source 显示提示来源
-        vim_item.menu = "["..string.upper(entry.source.name).."]"
-        return vim_item
-      end
-    })
-  },
-}
+    --根据文件类型来选择补全来源
+    cmp.setup.filetype('gitcommit', {
+        sources = cmp.config.sources({
+            {name = 'buffer'}
+        })
+    }),
 
--- Use buffer source for `/`.
-cmp.setup.cmdline('/', {
-  sources = {
-    { name = 'buffer' }
-  }
+    -- 命令模式下输入 `/` 启用补全
+    cmp.setup.cmdline('/', {
+        mapping = cmp.mapping.preset.cmdline(),
+        sources = {
+            { name = 'buffer' }
+        }
+    }),
+
+    -- 命令模式下输入 `:` 启用补全
+    cmp.setup.cmdline(':', {
+        mapping = cmp.mapping.preset.cmdline(),
+        sources = cmp.config.sources({
+            { name = 'path' }
+        }, {
+                { name = 'cmdline' }
+            })
+    }),
+
+    -- 设置补全显示的格式
+    formatting = {
+        format = lspkind.cmp_format({
+            with_text = true,
+            maxwidth = 50,
+            before = function(entry, vim_item)
+                vim_item.menu = "[" .. string.upper(entry.source.name) .. "]"
+                return vim_item
+            end
+        }),
+    },
 })
 
--- Use cmdline & path source for ':'.
-cmp.setup.cmdline(':', {
-  sources = cmp.config.sources({
-    { name = 'path' }
-  }, {
-      { name = 'cmdline' }
-    })
-})
